@@ -1,3 +1,22 @@
 services:
-    uptime-kuma:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - ./uptime-kuma-data:/app/data
+    networks:
+      - uptime-network # Connect to the shared network
+    restart: always
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-tunnel
+    restart: always
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN} # Read the token from the .env file
+    networks:
+      - uptime-network # Connect to the shared network
+
+networks:
+  uptime-network: # Define the shared network
