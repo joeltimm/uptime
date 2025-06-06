@@ -1,1 +1,4 @@
 .env
+# Ignore the Uptime Kuma database and data files
+uptime-kuma-data/
+
