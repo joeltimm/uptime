@@ -20,7 +20,3 @@ services:
 
 networks:
   uptime-network: # Define the shared network
-    ports:
-      - "3001:3001"
-    restart: always
-
